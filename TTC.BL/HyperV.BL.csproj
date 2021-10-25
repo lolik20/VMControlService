@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon></ApplicationIcon>
+    <Win32Resource></Win32Resource>
+    <StartupObject />
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  
+
+    
+  <ItemGroup>
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.0" />
+    <PackageReference Include="System.Management" Version="5.0.0" />
+    <PackageReference Include="System.Management.Automation" Version="7.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.13.1" />
+
+  </ItemGroup>
+
+</Project>
