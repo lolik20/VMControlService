@@ -105,3 +105,10 @@ C:\Users\MSI\Desktop\VMControl\MainApplication\obj\Debug\netcoreapp3.1\MainAppli
 C:\Users\MSI\Desktop\VMControl\MainApplication\obj\Debug\netcoreapp3.1\MainApplication.API.dll
 C:\Users\MSI\Desktop\VMControl\MainApplication\obj\Debug\netcoreapp3.1\MainApplication.API.pdb
 C:\Users\MSI\Desktop\VMControl\MainApplication\obj\Debug\netcoreapp3.1\MainApplication.API.genruntimeconfig.cache
+C:\Users\MSI\Desktop\VMControl\MainApplication\bin\Debug\netcoreapp3.1\Autofac.dll
+C:\Users\MSI\Desktop\VMControl\MainApplication\bin\Debug\netcoreapp3.1\Autofac.Extensions.DependencyInjection.dll
+C:\Users\MSI\Desktop\VMControl\MainApplication\bin\Debug\netcoreapp3.1\EventBus.Base.Standard.dll
+C:\Users\MSI\Desktop\VMControl\MainApplication\bin\Debug\netcoreapp3.1\EventBus.RabbitMQ.Standard.dll
+C:\Users\MSI\Desktop\VMControl\MainApplication\bin\Debug\netcoreapp3.1\Polly.dll
+C:\Users\MSI\Desktop\VMControl\MainApplication\bin\Debug\netcoreapp3.1\RabbitMQ.Client.dll
+C:\Users\MSI\Desktop\VMControl\MainApplication\bin\Debug\netcoreapp3.1\System.Threading.Channels.dll

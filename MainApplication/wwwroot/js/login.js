@@ -29,7 +29,8 @@ async function postData() {
 
     const res = await response.json();
 
-    document.body.classList.add('loaded');  var jwt = res.token;
+    document.body.classList.add('loaded');
+    var jwt = res.token;
   if(jwt == null){
     alert("Неверный логин или пароль")
   }

@@ -1,3 +1,7 @@
+using EventBus.Base.Standard.Configuration;
+using EventBus.RabbitMQ.Standard.Configuration;
+using EventBus.RabbitMQ.Standard.Options;
+using HyperV.API;
 using HyperV.BL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -29,35 +33,10 @@ namespace TTC.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //        .AddJwtBearer(options =>
-            //        {
-            //            options.RequireHttpsMetadata = false;
-            //            options.TokenValidationParameters = new TokenValidationParameters
-            //            {
-            //                // укзывает, будет ли валидироваться издатель при валидации токена
-            //                ValidateIssuer = false,
-            //                // строка, представляющая издателя
-            //                ValidIssuer = AuthOptions.ISSUER,
-
-            //                // будет ли валидироваться потребитель токена
-            //                ValidateAudience = false,
-            //                // установка потребителя токена
-            //                ValidAudience = AuthOptions.AUDIENCE,
-            //                // будет ли валидироваться время существования
-            //                ValidateLifetime = true,
-
-            //                // установка ключа безопасности
-            //                IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-            //                // валидация ключа безопасности
-            //                ValidateIssuerSigningKey = true,
-            //            };
-            //        });
-            services.AddControllers();
+            var rabbitMqOptions = Configuration.GetSection("RabbitMq").Get<RabbitMqOptions>();
+            services.AddRabbitMqConnection(rabbitMqOptions);
+            services.AddRabbitMqRegistration(rabbitMqOptions);
+            services.AddEventBusHandling(EventBusExtension.GetHandlers());
             services.AddControllers()
     .AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
