@@ -23,13 +23,11 @@ namespace MainApplication.BL
         }
         public string Register(string email, string password)
         {
-            //регистрация
             var dbUser = _context.Users.FirstOrDefault(x => x.Email == email);
             if (dbUser != null)
             {
                 return null;
             }
-            //генерация кода
             int code = new Random(DateTime.Now.Millisecond).Next(1000, 9999);
             
             var newUser = new User()
@@ -40,14 +38,10 @@ namespace MainApplication.BL
                 Password = password,
                 Role = Role.User
             };
-            //добавления юзера с генереным кодом
             _context.Users.Add(newUser);
             _context.SaveChanges();
-            //создание smtp клиента и отправка кода на почту
         
-            _emailService.Send(code.ToString());
-
-            //метод выдачи авторизации и выдачи токена
+            _emailService.Send(code.ToString(),email);
             var token = Login(email, password);
             return token;
         }
@@ -58,20 +52,16 @@ namespace MainApplication.BL
             {
                 var claims = GetClaims(dbUser);
                 var now = DateTime.UtcNow;
-                // создаем JWT-токен
                 var payload = new JwtPayload ();
                 var jwt = new JwtSecurityToken(
                         issuer: AuthOptions.ISSUER,
                         audience: AuthOptions.AUDIENCE,
                         notBefore: now,
-                        //данные юзера
                         claims: claims.Claims,
-                        //время жизни токена
                         expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
                         signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256)
 
                    );
-                //кодирование токена
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
                 return encodedJwt;
             }
@@ -79,7 +69,6 @@ namespace MainApplication.BL
         }
         public ClaimsIdentity GetClaims(User user)
         {
-            //выдача ролей для юзера
             var claims = new List<Claim>
                 {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
@@ -92,11 +81,9 @@ namespace MainApplication.BL
         }
         public bool ConfirmEmail(string email, int code)
         {
-            //метод подтвердения почты
             var dbUser = _context.Users.FirstOrDefault(x => x.Email == email && x.Code == code);
             if (dbUser != null)
             {
-                //установка флага подтверждено
                 dbUser.IsConfirmed = true;
                 _context.SaveChanges();
                 return true;

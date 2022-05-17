@@ -1,19 +1,23 @@
 ﻿using MainApplication.BL.Entities;
 using MainApplication.BL.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MainApplication.BL.Services
 {
     public class VmService : IVmService
     {
         private readonly ApplicationContext _context;
-        public VmService(ApplicationContext context)
+        private readonly IMemoryCache _cache;
+        public VmService(ApplicationContext context,IMemoryCache cache)
         {
             _context = context;
+            _cache = cache;
         }
         public IReadOnlyCollection<VM> FreeVM()
         {
@@ -41,19 +45,26 @@ namespace MainApplication.BL.Services
 
             return VMs.ToList();
         }
-        public void AddVm(string UserName, string VmName, int Tariff)
+        public async Task AddVm(string UserName, string VmName, int Tariff)
         {
             //метод добавления ВМ юзеру
             //получение юзера из бд с ВМ
-            var user = _context.Users.Include(x => x.VMs).FirstOrDefault(x => x.Email == UserName);
+            var user = await _context.Users.Include(x => x.VMs).FirstOrDefaultAsync(x => x.Email == UserName);
 
-
-            //преобразование int в enum тип
-            Tariff tariff = (Tariff)Enum.Parse(typeof(Tariff), Tariff.ToString());
             if (user != null)
             {
+                lock (user)
+                {
+                    var cache = _cache.Get(user.Id);
+                    if(cache != null)
+                    {
+                        throw new Exception("Подождите создание VM");
+                    }
+                }
+                Tariff tariff = await _context.Tariffs.FirstOrDefaultAsync(x => x.Id == Tariff);
+
                 //получение ВМ по имени
-                var vm = _context.VMs.FirstOrDefault(x => x.Name == VmName);
+                var vm = await _context.VMs.FirstOrDefaultAsync(x => x.Name == VmName);
                 //Если вм есть в базе, замена тарифа и присваивание ВМ юзеру
                 if (vm != null)
                 {
@@ -61,7 +72,7 @@ namespace MainApplication.BL.Services
                     user.VMs.Add(vm);
                     _context.SaveChanges();
                 }
-                //Если вм нет в базе, создание присваивание ВМ юзеру
+                //Если вм нет в базе, создание и присваивание ВМ юзеру
 
                 else
                 {
@@ -70,6 +81,7 @@ namespace MainApplication.BL.Services
                     user.VMs.Add(newVm);
                     _context.SaveChanges();
                 }
+                _cache.Set(user.Id, user,TimeSpan.FromMinutes(1));
             }
         }
     }

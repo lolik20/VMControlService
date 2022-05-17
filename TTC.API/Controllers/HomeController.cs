@@ -27,6 +27,10 @@ namespace TTC.API.Controllers
         [HttpGet("all")]
         public IActionResult GetAll()
         {
+            //надо переделать валидацию токена и вынести в отдельный middleware
+
+
+
             //парсинг токена из запроса
              var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
             //создание handler
@@ -58,6 +62,10 @@ namespace TTC.API.Controllers
         [HttpPost("TurnOn")]
         public IActionResult TurnOn([FromBody] VmActionRequest request)
         {
+
+            //надо переделать валидацию токена и вынести в отдельный middleware
+
+
             //парсинг токена из запроса
             var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
 
@@ -89,6 +97,10 @@ namespace TTC.API.Controllers
         [HttpPost("TurnOff")]
         public IActionResult TurnOff([FromBody] VmActionRequest request)
         {
+
+            //надо переделать валидацию токена и вынести в отдельный middleware
+
+
             //парсинг токена из запроса
             var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
 

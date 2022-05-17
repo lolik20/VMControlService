@@ -16,7 +16,7 @@ namespace MainApplication.BL.Services
             _configuration = configuration;
             _smtpClient = new SmtpClient("smtp.mail.ru", 587);
         }
-        public void SendEmail(string message)
+        public void SendEmail(string message,string email)
         {
             _smtpClient.UseDefaultCredentials = false;
             _smtpClient.Credentials = new NetworkCredential("ffftttyyyy666@mail.ru", "111yyyytttfff");

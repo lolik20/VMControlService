@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MainApplication.BL.Interfaces
 {
@@ -9,7 +10,7 @@ namespace MainApplication.BL.Interfaces
     {
         public IReadOnlyCollection<VM> GetUserVm(string email);
         public IReadOnlyCollection<VM> GetAllVMs();
-        public void AddVm(string UserName, string VmName,int tariff);
+        public Task AddVm(string UserName, string VmName,int tariff);
         public IReadOnlyCollection<VM> FreeVM();
 
     }

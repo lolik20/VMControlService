@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MainApplication.BL;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Management;
 using System.Management.Automation;
 using System.Text;
@@ -14,6 +16,11 @@ namespace TTC.BL
     }
     public class VmService : IVmService
     {
+        private readonly ApplicationContext _context;
+        public VmService(ApplicationContext context)
+        {
+            _context = context;
+        }
         public IReadOnlyCollection<VMMachine> GetAll()
         {
             //создание клиента powershell
@@ -34,7 +41,11 @@ namespace TTC.BL
             foreach (PSObject vm in psResult)
             {
                 //наполнение коллекции результата по свойствам
-                var model = new VMMachine() { Name = vm.Members["Name"].Value.ToString(), Status = vm.Members["State"].Value.ToString() };
+                var model = new VMMachine()
+                {
+                    Name = vm.Members["Name"].Value.ToString(),
+                    Status = vm.Members["State"].Value.ToString()
+                };
 
                 result.Add(model);
             }
@@ -60,67 +71,21 @@ namespace TTC.BL
             ps.Invoke();
             ps.Dispose();
         }
-        public void Edit(string VmName, int tariff)
+        public void Edit(string VmName, int tariffId)
         {
-            var gb = 1;
-            switch (tariff)
-            {
-                case 2:
-                    gb = 4;
-                    break;
-                case 3:
-                    gb = 8;
-                    break;
-            }
-            var threads = 1;
-            switch (tariff) {
-                case 2:
-                    threads = 2;
-                    break;
-                case 3:
-                    threads = 4;
-                    break;
-            }
+            var tariffModel = _context.Tariffs.FirstOrDefault(x => x.Id == tariffId);
 
             PowerShell ps = PowerShell.Create();
-            ps.Commands.AddScript("Stop-VM -Name " + VmName + " -Passthru | Set-VM -ProcessorCount "+threads+ " -MemoryStartupBytes "+gb+"GB -Passthru");
+            ps.Commands.AddScript("Stop-VM -Name " + VmName + " -Passthru | Set-VM -ProcessorCount " + tariffModel.Threads + " -MemoryStartupBytes " + tariffModel.Ram + "GB -Passthru");
             ps.Invoke();
             ps.Dispose();
         }
-        public void Create(int tariff,string vmName)
+        public void Create(int tariffId, string vmName)
         {
-            var ram = 1;
-            switch (tariff)
-            {
-                case 2:
-                    ram = 4;
-                    break;
-                case 3:
-                    ram = 8;
-                    break;
-            }
-            var hdd = 8;
-            switch (tariff)
-            {
-                case 2:
-                    hdd = 16;
-                    break;
-                case 3:
-                    hdd = 32;
-                    break;
-            }
-            var threads = 1;
-            switch (tariff)
-            {
-                case 2:
-                    threads = 2;
-                    break;
-                case 3:
-                    threads = 4;
-                    break;
-            }
+            var tariffModel = _context.Tariffs.FirstOrDefault(x => x.Id == tariffId);
+
             PowerShell ps = PowerShell.Create();
-            ps.Commands.AddScript($"New-VM -Name " + vmName+ " -MemoryStartupBytes " + ram+"GB -NewVHDPath d:/vhd/"+vmName+".vhdx -NewVHDSizeBytes "+hdd+ "GB | Set-VM -ProcessorCount " + threads );
+            ps.Commands.AddScript($"New-VM -Name " + vmName + " -MemoryStartupBytes " + tariffModel.Ram + "GB -NewVHDPath d:/vhd/" + vmName + ".vhdx -NewVHDSizeBytes " + tariffModel.HDD + "GB | Set-VM -ProcessorCount " + tariffModel.Threads);
             ps.Invoke();
             ps.Dispose();
         }

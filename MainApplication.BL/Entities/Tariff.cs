@@ -4,11 +4,11 @@ using System.Text;
 
 namespace MainApplication.BL.Entities
 {
-    public enum Tariff
+    public class Tariff
     {
-        None=0,
-        Start=1,
-        Business=2,
-        Professional=3
+        public int Id { get; set; }
+        public int Ram { get; set; }
+        public int Threads { get; set; }
+        public int HDD { get; set; }
     }
 }

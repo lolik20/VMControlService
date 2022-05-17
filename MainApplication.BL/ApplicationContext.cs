@@ -16,5 +16,6 @@ namespace MainApplication.BL
 
         public DbSet<User> Users { get; set; }
         public DbSet<VM> VMs { get; set; }
+        public DbSet<Tariff> Tariffs { get; set; }
     }
 }
