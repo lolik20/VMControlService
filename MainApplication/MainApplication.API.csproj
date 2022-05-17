@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
     <PackageReference Include="EventBus.RabbitMQ.Standard" Version="3.1.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.20" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
@@ -28,6 +29,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MainApplication.BL\MainApplication.BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\TTC.API\proto\vm.proto" GrpcServices="Client">
+      <Link>Protos\vm.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 
