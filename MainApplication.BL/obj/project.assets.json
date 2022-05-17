@@ -1404,19 +1404,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MSI\\.nuget\\packages\\": {}
+    "C:\\Users\\Max\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MSI\\Desktop\\VMControl\\MainApplication.BL\\MainApplication.BL.csproj",
+      "projectUniqueName": "C:\\Users\\Max\\Source\\Repos\\VMControlService\\MainApplication.BL\\MainApplication.BL.csproj",
       "projectName": "MainApplication.BL",
-      "projectPath": "C:\\Users\\MSI\\Desktop\\VMControl\\MainApplication.BL\\MainApplication.BL.csproj",
-      "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MSI\\Desktop\\VMControl\\MainApplication.BL\\obj\\",
+      "projectPath": "C:\\Users\\Max\\Source\\Repos\\VMControlService\\MainApplication.BL\\MainApplication.BL.csproj",
+      "packagesPath": "C:\\Users\\Max\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Max\\Source\\Repos\\VMControlService\\MainApplication.BL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Max\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1494,7 +1494,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

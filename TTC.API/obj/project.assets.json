@@ -5337,19 +5337,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MSI\\.nuget\\packages\\": {}
+    "C:\\Users\\Max\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MSI\\Desktop\\VMControl\\TTC.API\\HyperV.API.csproj",
+      "projectUniqueName": "C:\\Users\\Max\\Source\\Repos\\VMControlService\\TTC.API\\HyperV.API.csproj",
       "projectName": "HyperV.API",
-      "projectPath": "C:\\Users\\MSI\\Desktop\\VMControl\\TTC.API\\HyperV.API.csproj",
-      "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MSI\\Desktop\\VMControl\\TTC.API\\obj\\",
+      "projectPath": "C:\\Users\\Max\\Source\\Repos\\VMControlService\\TTC.API\\HyperV.API.csproj",
+      "packagesPath": "C:\\Users\\Max\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Max\\Source\\Repos\\VMControlService\\TTC.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Max\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5363,8 +5363,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\MSI\\Desktop\\VMControl\\TTC.BL\\HyperV.BL.csproj": {
-              "projectPath": "C:\\Users\\MSI\\Desktop\\VMControl\\TTC.BL\\HyperV.BL.csproj"
+            "C:\\Users\\Max\\Source\\Repos\\VMControlService\\TTC.BL\\HyperV.BL.csproj": {
+              "projectPath": "C:\\Users\\Max\\Source\\Repos\\VMControlService\\TTC.BL\\HyperV.BL.csproj"
             }
           }
         }
@@ -5414,7 +5414,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

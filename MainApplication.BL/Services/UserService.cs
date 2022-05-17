@@ -15,9 +15,11 @@ namespace MainApplication.BL
     public class UserService : IUserService
     {
         private readonly ApplicationContext _context;
-        public UserService(ApplicationContext context)
+        private readonly IEmailService _emailService;
+        public UserService(ApplicationContext context,IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
         public string Register(string email, string password)
         {
@@ -42,16 +44,8 @@ namespace MainApplication.BL
             _context.Users.Add(newUser);
             _context.SaveChanges();
             //создание smtp клиента и отправка кода на почту
-            SmtpClient client = new SmtpClient("smtp.mail.ru", 587);
-            client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("ffftttyyyy666@mail.ru", "111yyyytttfff");
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("ffftttyyyy666@mail.ru");
-            mailMessage.To.Add(email);
-            mailMessage.Body = code.ToString();
-            mailMessage.Subject = "subject";
-            client.EnableSsl = true;
-            client.Send(mailMessage);
+        
+            _emailService.Send(code.ToString());
 
             //метод выдачи авторизации и выдачи токена
             var token = Login(email, password);
